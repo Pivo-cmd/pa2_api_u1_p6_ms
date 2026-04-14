@@ -4,18 +4,18 @@ public class Pedido {
     private String cliente;
     private String produto;
     private double total;
-    private String correo;
+    private String destino;
 
     // Constructor(es)
     public Pedido() {
 
     }
 
-    public Pedido(String cliente, String produto, double total, String correo) {
+    public Pedido(String cliente, String produto, double total, String destino) {
         this.cliente = cliente;
         this.produto = produto;
         this.total = total;
-        this.correo = correo;
+        this.destino = destino;
     }
 
     // Metodos getter y setter
@@ -43,12 +43,12 @@ public class Pedido {
         this.total = total;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getDestino() {
+        return destino;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
 
 }

@@ -11,18 +11,18 @@ public class Main {
         Quarkus.run(App.class, args);
     }
 
-    public static class App implements QuarkusApplication{
-        
+    public static class App implements QuarkusApplication {
+
         @Inject
         private PedidoService pedidoService;
 
         @Override
-        public int run(String... args){
+        public int run(String... args) {
 
-        Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 10.0, "miguel_soria@temporal0.com");
-        
-        pedidoService.registrar(pedido);
-        return 0;
+            Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, "miguel_soria@temporal0.com");
+
+            pedidoService.registrar(pedido);
+            return 0;
         }
     }
 }
