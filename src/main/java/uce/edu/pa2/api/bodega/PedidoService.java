@@ -5,7 +5,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-@Unremovable
 public class PedidoService {
     // DI por atributo
     // @Inject
