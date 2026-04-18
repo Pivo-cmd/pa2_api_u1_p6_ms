@@ -34,12 +34,12 @@ public class PedidoService {
         System.out.println("Total: " + pedido.getTotal());
         System.out.println("Guardando en la base de datos");
         
-        pago.ejecutar(pedido.getTotal());
+         pago.ejecutar(pedido.getTotal());
 
         Notificador notificador = this.select.seleccionar(pedido.getTotal());
         notificador.enviar(pedido.getDestino(), "Pedido registrado");
     
-        InterComprobante comprobanteSelect = this.cb.seleccionar(pedido);
-        comprobanteSelect.generarComprobante(pedido);
+         InterComprobante comprobanteSelect = this.cb.seleccionar(pedido);
+         comprobanteSelect.generarComprobante(pedido);
     }
 }

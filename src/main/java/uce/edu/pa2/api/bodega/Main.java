@@ -21,8 +21,8 @@ public class Main {
 
         //2. Service Locator
         //private PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
-        @Inject
-        private PagoTarjeta pagoTc;
+         @Inject
+         private PagoTarjeta pagoTc;
 
         @Inject 
         private PagoEfectivo pagoEf;
@@ -31,8 +31,8 @@ public class Main {
         public int run(String... args) {
 
             // Caso 1 (montos mayores a 120))
-            Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, "");
-            pedidoService.registrar(pedido, pagoTc);
+             Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, null);
+             pedidoService.registrar(pedido, pagoTc);
 
             // Caso 2 (montos entre 50 y 120)
             //Pedido pedido2 = new Pedido("Juan Lopez", "Pepsi", 65.0, "ana_lopez@temporal0.com");
