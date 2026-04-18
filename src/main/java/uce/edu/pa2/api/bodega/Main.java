@@ -17,30 +17,32 @@ public class Main {
 
         //1.DI
         @Inject
-        private PedidoService pedidoService2;
+        private PedidoService pedidoService;
 
         //2. Service Locator
         //private PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
+        @Inject
+        private PagoTarjeta pagoTc;
+
+        @Inject 
+        private PagoEfectivo pagoEf;
 
         @Override
         public int run(String... args) {
 
-            PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
-
             // Caso 1 (montos mayores a 120))
-            Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, "miguel_soria@temporal0.com");
-            pedidoService.registrar(pedido);
-            System.out.println();
+            Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, "");
+            pedidoService.registrar(pedido, pagoTc);
 
             // Caso 2 (montos entre 50 y 120)
-            Pedido pedido2 = new Pedido("Juan Lopez", "Pepsi", 65.0, "ana_lopez@temporal0.com");
-            pedidoService.registrar(pedido2);
-            System.out.println();
+            //Pedido pedido2 = new Pedido("Juan Lopez", "Pepsi", 65.0, "ana_lopez@temporal0.com");
+            //pedidoService.registrar(pedido2);
+            //System.out.println();
 
             // Caso 3 (montos menores a 50)
-            Pedido pedido3 = new Pedido("Ana Ramirez", "Pineapple Juice", 30.0, "ana_ramirez@temporal0.com");
-            pedidoService.registrar(pedido3);
-            System.out.println();
+            //Pedido pedido3 = new Pedido("Ana Ramirez", "Pineapple Juice", 30.0, "ana_ramirez@temporal0.com");
+            //pedidoService.registrar(pedido3);
+            //System.out.println();
 
             return 0;
         }

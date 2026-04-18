@@ -24,14 +24,22 @@ public class PedidoService {
 
     @Inject
     private NotificadorSelector select;
+    @Inject
+    private ComprobanteSelector cb;
 
-    public void registrar(Pedido pedido) {
+
+    public void registrar(Pedido pedido, PagoStrategy pago) {
         System.out.println("Registrando pedido");
         System.out.println("Cliente: " + pedido.getCliente());
         System.out.println("Total: " + pedido.getTotal());
         System.out.println("Guardando en la base de datos");
+        
+        pago.ejecutar(pedido.getTotal());
 
         Notificador notificador = this.select.seleccionar(pedido.getTotal());
         notificador.enviar(pedido.getDestino(), "Pedido registrado");
+    
+        InterComprobante comprobanteSelect = this.cb.seleccionar(pedido);
+        comprobanteSelect.generarComprobante(pedido);
     }
 }
