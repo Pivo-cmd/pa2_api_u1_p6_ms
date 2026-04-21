@@ -3,7 +3,6 @@ package uce.edu.pa2.api.bodega;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
-import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
 
 @QuarkusMain
@@ -13,36 +12,51 @@ public class Main {
     }
 
     public static class App implements QuarkusApplication {
-        //Modelos IoC
-
-        //1.DI
+        
         @Inject
-        private PedidoService pedidoService;
-
-        //2. Service Locator
-        //private PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
+        private AmbitoAplicacion ambitoApp;
+        
         @Inject
-        private PagoTarjeta pagoTc;
+        private ClaseIntermedia claseInter;
 
-        @Inject 
-        private PagoEfectivo pagoEf;
+        @Inject
+        private AmbitoRequest ambitoReq;
 
-        @Override
-        public int run(String... args) {
+        @Inject
+        private AmbitoSingleton ambitoSingleton;
+        
+        @Inject
+        private AmbitoInyect ambitoInyect;
+        @Override 
+        public int run(String... args) throws Exception {
+            
+            System.out.println(this.ambitoApp);
 
-            // Caso 1 (montos mayores a 120))
-            Pedido pedido = new Pedido("Miguel Soria", "Coca Cola", 120.0, "");
-            pedidoService.registrar(pedido, pagoTc);
+            System.out.println(this.ambitoApp.incrementar());
+            System.out.println(this.ambitoApp.incrementar());
+            System.out.println(this.ambitoApp.incrementar());
 
-            // Caso 2 (montos entre 50 y 120)
-            //Pedido pedido2 = new Pedido("Juan Lopez", "Pepsi", 65.0, "ana_lopez@temporal0.com");
-            //pedidoService.registrar(pedido2);
-            //System.out.println();
+            this.claseInter.metodoA();
 
-            // Caso 3 (montos menores a 50)
-            //Pedido pedido3 = new Pedido("Ana Ramirez", "Pineapple Juice", 30.0, "ana_ramirez@temporal0.com");
-            //pedidoService.registrar(pedido3);
-            //System.out.println();
+            //System.out.println("---Ambito request---");
+            //System.out.println(this.ambitoReq.incrementar());
+            //System.out.println(this.ambitoReq.incrementar());
+            //System.out.println(this.ambitoReq.incrementar());
+            
+            System.out.println("---Ambito Dependent---");
+            System.out.println(this.ambitoInyect.incrementar());
+            System.out.println(this.ambitoInyect.incrementar());
+            System.out.println(this.ambitoInyect.incrementar());
+            
+            this.claseInter.metodoA_Inyect();
+
+            System.out.println("---Ambito Singleton---");
+            System.out.println(this.ambitoSingleton);
+            System.out.println(this.ambitoSingleton.incrementar());
+            System.out.println(this.ambitoSingleton.incrementar());
+            System.out.println(this.ambitoSingleton.incrementar());
+            
+            this.claseInter.metodoA_Singleton();
 
             return 0;
         }
