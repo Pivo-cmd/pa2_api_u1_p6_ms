@@ -12,52 +12,22 @@ public class Main {
     }
 
     public static class App implements QuarkusApplication {
-        
         @Inject
-        private AmbitoAplicacion ambitoApp;
-        
+        private ProcesadorVentaService procesadorVentaService;
         @Inject
-        private ClaseIntermedia claseInter;
-
-        @Inject
-        private AmbitoRequest ambitoReq;
-
-        @Inject
-        private AmbitoSingleton ambitoSingleton;
-        
-        @Inject
-        private AmbitoInyect ambitoInyect;
-        @Override 
+        private EstadisticasVentasGlobales estadisticas;
+        @Override
         public int run(String... args) throws Exception {
+            Venta venta1 = new Venta("Miguel Soria", 100.0);
+            procesadorVentaService.procesar(venta1);
             
-            System.out.println(this.ambitoApp);
-
-            System.out.println(this.ambitoApp.incrementar());
-            System.out.println(this.ambitoApp.incrementar());
-            System.out.println(this.ambitoApp.incrementar());
-
-            this.claseInter.metodoA();
-
-            //System.out.println("---Ambito request---");
-            //System.out.println(this.ambitoReq.incrementar());
-            //System.out.println(this.ambitoReq.incrementar());
-            //System.out.println(this.ambitoReq.incrementar());
+            Venta venta2 = new Venta("Pedro Perez", 20.0);
+            procesadorVentaService.procesar(venta2);
             
-            System.out.println("---Ambito Dependent---");
-            System.out.println(this.ambitoInyect.incrementar());
-            System.out.println(this.ambitoInyect.incrementar());
-            System.out.println(this.ambitoInyect.incrementar());
-            
-            this.claseInter.metodoA_Inyect();
+            Venta venta3 = new Venta("Mario Martinez", 5.0);
+            procesadorVentaService.procesar(venta3);
 
-            System.out.println("---Ambito Singleton---");
-            System.out.println(this.ambitoSingleton);
-            System.out.println(this.ambitoSingleton.incrementar());
-            System.out.println(this.ambitoSingleton.incrementar());
-            System.out.println(this.ambitoSingleton.incrementar());
-            
-            this.claseInter.metodoA_Singleton();
-
+            this.estadisticas.mostrarEstadisticasGlobales();
             return 0;
         }
     }
