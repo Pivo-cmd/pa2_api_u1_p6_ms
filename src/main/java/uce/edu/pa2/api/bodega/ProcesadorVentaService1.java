@@ -2,9 +2,9 @@ package uce.edu.pa2.api.bodega;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
 @ApplicationScoped
-public class ProcesadorVentaService {
+public class ProcesadorVentaService1 {
+
     @Inject
     private EstadisticasVentasGlobales estadisticas;
     @Inject //Inyeccion de traking = creación de objeto
@@ -25,8 +25,7 @@ public class ProcesadorVentaService {
         }
 
         this.trakingVenta.finalizar();
-        //reinicio para otro escenario
-        //this.trakingVenta.reiniciar();
+
         // registrar estadisticas
         this.estadisticas.registarVenta(venta.getTotal());
     }
