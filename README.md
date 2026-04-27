@@ -1,81 +1,183 @@
 # pa2_api_u1_p6_ms
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+⚙️ Contextos en Quarkus
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+A continuación se presentan ejemplos prácticos de los contextos:
 
-## Running the application in dev mode
+@ApplicationScoped
+@Dependent
+@Singleton
 
-You can run your application in dev mode that enables live coding using:
+---
 
-```shell script
-./mvnw quarkus:dev
+## 🔵 ApplicationScoped
+
+Se utiliza cuando se necesita **una sola instancia compartida en toda la aplicación**.
+
+### Ejemplos:
+
+1. Configuración global de la tienda (Como nombre, moneda o reglas generales)
+
+```java
+@ApplicationScoped
+public class ConfiguracionTienda {}
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+2. Catálogo general de productos disponibles
 
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+```java
+@ApplicationScoped
+public class CatalogoProductos {}
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+3. Gestor de impuestos aplicables
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+```java
+@ApplicationScoped
+public class Impuestos {}
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+4. Administrador de promociones
 
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
+```java
+@ApplicationScoped
+public class Promociones {}
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+5. Gestor de políticas de devolución
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+```java
+@ApplicationScoped
+public class PoliticaDevoluciones {}
 ```
 
-You can then execute your native executable with: `./target/pa2_api_u1_p6_ms-1.0.0-SNAPSHOT-runner`
+6. Gestor de reglas de descuentos
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+```java
+@ApplicationScoped
+public class PoliticaDescuentos {}
+```
 
-## Related Guides
+7. Configuración global de envíos
 
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and Jakarta Persistence
-- RESTEasy Classic JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy Classic
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
-- SmallRye JWT ([guide](https://quarkus.io/guides/security-jwt)): Secure your applications with JSON Web Token
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
+```java
+@ApplicationScoped
+public class ParametrosEnvio {}
+```
 
-## Provided Code
+---
 
-### Hibernate ORM
+## 🟡 Dependent
 
-Create your first JPA entity
+Se usa cuando se requiere **una nueva instancia cada vez**, normalmente para objetos pequeños o específicos de una operación
 
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+### Ejemplos:
 
+1. Representación de una orden de compra
 
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+```java
+@Dependent
+public class OrdenCompra {}
+```
 
+2. Representación de un ítem dentro de una factura
 
-### RESTEasy JAX-RS
+```java
+@Dependent
+public class ItemFactura {}
+```
 
-Easily start your RESTful Web Services
+3. Representación de una dirección de entrega
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+```java
+@Dependent
+public class DireccionEntrega {}
+```
+
+4. Representación de un carrito de compra
+
+```java
+@Dependent
+public class CarritoCompra {}
+```
+
+5. Representación de los datos de un cliente en una transacción
+
+```java
+@Dependent
+public class DatosCliente {}
+```
+
+6. Representación de un resumen de compra
+
+```java
+@Dependent
+public class ResumenCompra {}
+```
+
+7. Representación de los datos necesarios para facturación
+
+```java
+@Dependent
+public class DatosFacturacion {}
+```
+
+---
+
+## 🔴 Singleton
+
+Este contexto garantiza que **exista una única instancia en toda la aplicación**, incluso más controlada que ApplicationScoped en algunos escenarios.
+
+### Ejemplos:
+
+1. Configuración general del sistema
+
+```java
+@Singleton
+public class ConfiguracionSistema {}
+```
+
+2. Controlador de accesos y validaciones generales
+
+```java
+@Singleton
+public class ControlAccesoSistema {}
+```
+
+3. Controlador para registro de errores del sistema
+
+```java
+@Singleton
+public class RegistroErrores {}
+```
+
+4. Registro único de auditoría
+
+```java
+@Singleton
+public class AuditoriaSistema {}
+```
+
+5. Controlador de sesiones activas
+
+```java
+@Singleton
+public class Sesiones {}
+```
+
+6. Generador global de identificadores
+
+```java
+@Singleton
+public class GeneradorIds {}
+```
+
+7. Monitor del sistema
+
+```java
+@Singleton
+public class EstadoSistema {}
+```
+
+---
+
