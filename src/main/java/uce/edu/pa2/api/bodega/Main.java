@@ -13,34 +13,16 @@ public class Main {
 
     public static class App implements QuarkusApplication {
         @Inject
-        private ProcesadorVentaService procesadorVentaService;
+        private ProcesadorVentaServiceTiempo procesadorVentaServiceTiempo;
         @Inject
-        private EstadisticasVentasGlobales estadisticas;
-        @Inject
-        private ProcesadorVentaService1 procesadorVentaService1;
-        @Inject
-        private ProcesadorVentaEnLineaService procesadorVentaEnLineaService;
-        @Override
+        private InventarioService inventarioService;
+               @Override
         public int run(String... args) throws Exception {
             //Procesador 1
             Venta venta1 = new Venta("Miguel Soria", 100.0);
-            procesadorVentaService.procesar(venta1);
-            
-            Venta venta2 = new Venta("Pedro Perez", 20.0);
-            procesadorVentaService.procesar(venta2);
-
-            //Procesador 2
-            Venta venta4 = new Venta("Richard Santos", 5.0);
-            procesadorVentaService1.procesar(venta4);
-            
-            Venta venta5 = new Venta("Lucas Diaz", 5.0);
-            procesadorVentaService1.procesar(venta5);
-
-            //Procesador de venta en linea
-            Venta venta6 = new Venta("Serena Mendoza", 5.0);
-            procesadorVentaEnLineaService.procesar(venta6);
-
-            this.estadisticas.mostrarEstadisticasGlobales();
+            procesadorVentaServiceTiempo.procesar(venta1);
+            procesadorVentaServiceTiempo.reProcesar(venta1);
+            inventarioService.registrarInventario(venta1);
             return 0;
         }
     }
