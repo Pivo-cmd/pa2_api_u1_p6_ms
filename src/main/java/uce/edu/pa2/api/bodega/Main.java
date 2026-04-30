@@ -21,8 +21,8 @@ public class Main {
             //Procesador 1
             Venta venta1 = new Venta("Miguel Soria", 100.0);
             procesadorVentaServiceTiempo.procesar(venta1);
-            procesadorVentaServiceTiempo.reProcesar(venta1);
-            inventarioService.registrarInventario(venta1);
+            //procesadorVentaServiceTiempo.reProcesar(venta1);
+            //inventarioService.registrarInventario(venta1);
             return 0;
         }
     }

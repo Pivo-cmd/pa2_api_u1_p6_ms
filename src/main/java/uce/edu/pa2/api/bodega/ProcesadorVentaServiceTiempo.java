@@ -8,7 +8,9 @@ public class ProcesadorVentaServiceTiempo {
     @Inject
     private EstadisticasVentasGlobales estadisticas;
     @MedirTiempo
+    @Log
     public void procesar(Venta venta) {
+        //System.out.println("Entró al metodo con los siguientes valores: " + venta.getCliente());
         // inicia la venta
         System.out.println("-----Procesando pedido-----");
         // consultando en stock de cada item
@@ -25,6 +27,8 @@ public class ProcesadorVentaServiceTiempo {
         // registrar estadisticas
         this.estadisticas.registarVenta(venta.getTotal());
         System.out.println("-----Pedido finalizado-----");
+        // No deberia poder interceptar internamente
+        //  this.reProcesar(venta);
     }
     @MedirTiempo
     public void reProcesar(Venta venta) {
