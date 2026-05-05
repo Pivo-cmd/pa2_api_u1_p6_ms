@@ -13,16 +13,13 @@ public class Main {
 
     public static class App implements QuarkusApplication {
         @Inject
-        private ProcesadorVentaServiceTiempo procesadorVentaServiceTiempo;
-        @Inject
-        private InventarioService inventarioService;
-               @Override
+        private ProcesadorCompraService compraService;
+        @Override
         public int run(String... args) throws Exception {
-            //Procesador 1
-            Venta venta1 = new Venta("Miguel Soria", 100.0);
-            procesadorVentaServiceTiempo.procesar(venta1);
-            //procesadorVentaServiceTiempo.reProcesar(venta1);
-            //inventarioService.registrarInventario(venta1);
+            Compra c1 = new Compra("Pepe", 100.0);
+            System.out.println();
+            this.compraService.procesar(c1);
+           
             return 0;
         }
     }
