@@ -1,8 +1,11 @@
 package uce.edu.pa2.api.bodega;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Priority(1)
+// Registra ese orden en la lista
 public class DescuentoIVA implements Descuento {
 
     @Override
